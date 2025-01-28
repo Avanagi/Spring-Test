@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: ms-human
+  datasource:
+    url: jdbc:postgresql://localhost:5432/SpringTest
+    password: root
+    username: postgres
+    driver-class-name: org.postgresql.Driver
+server:
+  port: 4444
