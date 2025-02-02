@@ -19,7 +19,7 @@ public class HumanService {
 
     @Transactional(readOnly = true)
     public List<HumanDto> getAllHumans() {
-        return humanMapper.toHumanDtoList(humanRepository.findAll());
+        return humanMapper.toDtoList(humanRepository.findAll());
     }
 
     @Transactional(readOnly = true)
@@ -27,14 +27,14 @@ public class HumanService {
         if (id != null) {
             HumanEntity humanEntity = humanRepository.findById(id)
                     .orElseThrow(() -> new NullPointerException("Human with id " + id + " not found"));
-            return humanMapper.toHumanDto(humanEntity);
+            return humanMapper.toDto(humanEntity);
         }
         return null;
     }
 
     @Transactional
     public void addHuman(HumanDto humanDto) {
-        humanRepository.save(humanMapper.toHumanEntity(humanDto));
+        humanRepository.save(humanMapper.toDao(humanDto));
     }
 
     @Transactional
@@ -46,7 +46,7 @@ public class HumanService {
     public void updateHuman(Long id, HumanDto humanDto) {
         HumanEntity existingHuman = humanRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Человек не найден"));
-        humanMapper.updateHumanFromDto(humanDto, existingHuman);
+        humanMapper.updateFromDto(humanDto, existingHuman);
         humanRepository.save(existingHuman);
     }
 }

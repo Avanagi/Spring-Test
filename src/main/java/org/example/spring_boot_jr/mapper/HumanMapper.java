@@ -9,13 +9,10 @@ import org.mapstruct.MappingTarget;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface HumanMapper {
-    HumanDto toHumanDto(HumanEntity humanEntity);
+public interface HumanMapper extends MapperHelper<HumanDto, HumanEntity> {
 
-    HumanEntity toHumanEntity(HumanDto humanDto);
-
-    List<HumanDto> toHumanDtoList(List<HumanEntity> humanEntities);
+    List<HumanDto> toDtoList(List<HumanEntity> humanEntities);
 
     @Mapping(target = "id", ignore = true)
-    void updateHumanFromDto(HumanDto dto, @MappingTarget HumanEntity entity);
+    void updateFromDto(HumanDto dto, @MappingTarget HumanEntity entity);
 }
